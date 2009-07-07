@@ -2,6 +2,30 @@
 
 var videoElement = document.createElement('video');
 
+window.__processVideo = function(videoElement) {
+        var div = document.createElement('div');
+        var sources = videoElement.getElementsByTagName('source');
+        for (var i = 0; i < sources.length; i++) {
+                if (sources[i].getAttribute('type') == 'video/mp4') {
+                        src = sources[i].getAttribute('src');
+                        break;
+                }
+        }
+
+        var autoplay = new Boolean(videoElement.getAttribute('autoplay'));
+        var autobuffer = new Boolean(videoElement.getAttribute('autobuffer'));
+
+        var flashvars = "config={'playerId':'player','clip':{'autoPlay':" + autoplay + ", 'autoBuffering':" + autobuffer + ",'url':'" + src + "'},'playlist':[{'url':'" + src + "'}]}";
+        html = '<object type="application/x-shockwave-flash" width="100%" height="100%">'
+                + ' <param name="flashvars" value="' + flashvars + '" />'
+                + ' <param name="movie" value="flowplayer-3.1.1.swf" />'
+                + '</object>';
+        div.innerHTML = html;
+	videoElement.appendChild(div);
+
+	div.style.cssText = videoElement.style.cssText;
+}
+
 // Test for native support first
 if (("autoplay" in videoElement))
 	return;
@@ -32,8 +56,16 @@ if ("MozBinding" in videoElement.style) {
 	return;
 }
 	
-// TODO: Other browsers
+window.setInterval(function() {
+	var videos = document.body.getElementsByTagName('video');
+	for (var i = 0; i < videos.length; i++) {
+		if (videos[i].__processed)
+			continue;
 
+		videos[i].__processed = true;		
+		window.__processVideo(videos[i]);
+	}
+}, 3000);
 
 })();
 

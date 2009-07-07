@@ -1,4 +1,4 @@
-function() {
+(function() {
 
 var videoElement = document.createElement('video');
 
@@ -28,5 +28,5 @@ if ("MozBinding" in videoElement.style) {
 	
 // TODO: Other browsers
 
-}();
+})();
 

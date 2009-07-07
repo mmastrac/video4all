@@ -22,11 +22,18 @@ if ("behavior" in videoElement.style) {
 
 // Mozilla-style bindings?
 if ("MozBinding" in videoElement.style) {
-	// TODO: Mozilla-style
+        var style = document.createElement('style');
+        style.type = 'text/css';
+        style.textContent = 'video { display: block; -moz-binding: url("video4all.xml#video4all"); }';
+
+	var anchorScript = document.getElementsByTagName('script')[0];
+	anchorScript.parentNode.insertBefore(style, anchorScript);
+
 	return;
 }
 	
 // TODO: Other browsers
+
 
 })();
 

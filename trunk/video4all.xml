@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<bindings xmlns="http://www.mozilla.org/xbl"
+         xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+  <binding id="video4all">
+    <content>
+      hi <xul:button label="OK"/>
+    </content>
+  </binding>
+</bindings>

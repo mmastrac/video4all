@@ -1,0 +1,7 @@
+html, video {
+  border:1px solid black;
+  background-color: green;
+  width:200px;
+  height:300px;
+  behavior: url(/ievideo/ievideo.htc);
+}
